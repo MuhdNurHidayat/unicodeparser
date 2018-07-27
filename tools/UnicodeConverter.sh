@@ -50,7 +50,7 @@ do
 done
 as_delay() {
 	if [ -n "`echo -En "$1" | sed 's/[0-9]//g'`" -o -z "$1" ] ;then
-		echo "$1" is not a vaild delay. >&2
+		echo -E "$1" is not a vaild delay. >&2
 		exit 1
 	fi
 }
@@ -58,7 +58,7 @@ as_delay $_T
 as_delay $_t
 as_delay $_d
 if [ "$_mode" != "1" -a "$_mode" != "2" -a "$_mode" != "3" -a "$_mode" != "4" ] ;then
-	echo "$_mode" is not a vaild mode.
+	echo -E "$_mode" is not a vaild mode. >&2
 	exit 1
 fi
 if [ $_s = "0" ];then
