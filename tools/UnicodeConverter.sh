@@ -14,7 +14,10 @@ option:
  -t DELAY   (only in mode 1 or 2) set the delay(ms) (default is $_t) between keystrokes
  -d DELAY   (only in mode 2) set the delay(ms) (default is $_d) between typing chars
  -m MODE    set the mode (default is $_mode) of this script, 1 or 2 or 3 or 4:
-               1    use clipboard and ctrl+v (It is a bug of Minetest's paste, so this way may not available.)
+               1    use clipboard and ctrl+v  
+                    (There is a bug in Minetest's paste, which is why the mode use two ctrl+v
+		    but not normally one, so this way may be not available in your environment.
+		    I tested it only in my computer, but in my computer mode 1 is the best mode)
                2    type chars of the transformed text one-by-one automatically
                3    only copy the transformed text to clipboard
                4    only print the transformed text
