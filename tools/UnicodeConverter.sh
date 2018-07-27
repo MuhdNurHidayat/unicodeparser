@@ -1,5 +1,5 @@
 #!/bin/bash
-_input=` zenity --entry --text '保持 Minetest 处于输入界面并在此输入内容：' --title 'Minetest 输入辅助工具' ` #用户输入
+_input=` zenity --entry --text '保持 Minetest 处于游戏界面并在此输入内容：' --title 'Minetest 输入辅助工具' ` #用户输入
 if [ -n "$_input" ]; then
 	_input=".uc `( ( echo -nE $_input) | iconv -t utf-16LE) | busybox hexdump -v -e '/2 "\u%04x"' `" #转换成16进制
 	sleep 0.25
