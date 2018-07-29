@@ -16,8 +16,12 @@ option:
  -m MODE    set the mode (default is $_mode) of this script, 1 or 2 or 3 or 4:
                1    use clipboard and ctrl+v  
                     (There is a bug in Minetest's paste, which is why the mode use two ctrl+v
-		    but not normally one, so this way may be not available in your environment.
-		    I tested it only in my computer, but in my computer mode 1 is the best mode)
+                    but not normally one, so this way may be not available in your environment.
+                    I tested it only in Minetest 0.4.17.1, but in my envitonment is the best mode.
+                    If your Minetest is above version 5.0.0, please try this mode first.
+                    If abnormal, please try mode 1.5)
+               1.5  use clipboard and ctrl+v (use normally one ctrl+v.
+                    It seems that the bug in mode 1 has been fixed in Minetest 5.0.0)
                2    type chars of the transformed text one-by-one automatically
                3    only copy the transformed text to clipboard
                4    only print the transformed text
@@ -57,7 +61,7 @@ as_delay() {
 as_delay $_T
 as_delay $_t
 as_delay $_d
-if [ "$_mode" != "1" -a "$_mode" != "2" -a "$_mode" != "3" -a "$_mode" != "4" ] ;then
+if [ "$_mode" != "1" -a "$_mode" != "1.5" -a "$_mode" != "2" -a "$_mode" != "3" -a "$_mode" != "4" ] ;then
 	echo -E "$_mode" is not a vaild mode. >&2
 	exit 1
 fi
@@ -74,6 +78,12 @@ case $_mode in
 		_oldclip="`xclip -o -selection clipboard`"
 		echo -nE "$_output" | xclip -i -selection clipboard
 		xdotool key --clearmodifiers --delay $_t $_key ctrl+v ctrl+v Return 
+		echo -nE "$_oldclip" | xclip -i -selection clipboard
+	;;
+	1.5)
+		_oldclip="`xclip -o -selection clipboard`"
+		echo -nE "$_output" | xclip -i -selection clipboard
+		xdotool key --clearmodifiers --delay $_t $_key ctrl+v Return
 		echo -nE "$_oldclip" | xclip -i -selection clipboard
 	;;
 	2)
