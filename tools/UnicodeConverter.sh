@@ -26,7 +26,7 @@ option:
                2    type chars of the transformed text one-by-one automatically and dont't use paste.
                3    only copy the transformed text to clipboard
                4    only print the transformed text
- -h HOW     (only in MODE from 1 to 2) tell script how you use this script.
+ -H HOW     (only in MODE from 1 to 2) tell script how you use this script.
             HOW (default is $_h) is 1 (if you use script when in game interface, use 1) or 2 (if you
             use script when in chat interface, use 2)
  -s TEXT    TEXT will be transformed. If use this option, the input box will not be used
@@ -51,14 +51,14 @@ _text=""
 _s=0
 
 ## Get options
-while getopts "T:t:d:m:h:s:k:h" opt;
+while getopts "T:t:d:m:H:s:k:h" opt;
 do
 	case $opt in
 		T) _T="$OPTARG" ;;
 		t) _t="$OPTARG" ;;
 		d) _d="$OPTARG" ;;
 		m) _mode="$OPTARG" ;;
-		h) _h="$OPTARG" ;;
+		H) _h="$OPTARG" ;;
 		s) _text="$OPTARG";_s=1 ;;
 		k) _key="$OPTARG" ;;
 		h) echo "$_help" ;exit 0 ;;
