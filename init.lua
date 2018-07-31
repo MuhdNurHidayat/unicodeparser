@@ -61,6 +61,7 @@ function sendForProcess(texts)
         table.insert(toProcess,lineTemp)
       end
 	  local finalOut = table.concat(toProcess)
+	  minetest.display_chat_message("You said: "..finalOut)
 	  minetest.send_chat_message(finalOut)
       return true
 	end
