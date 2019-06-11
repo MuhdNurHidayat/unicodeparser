@@ -1,45 +1,43 @@
 #!/bin/bash
+_verinfo="UnicodeConverter.sh 1.0
+Copyright (C) 2019 Hagb and contributors
+released under The MIT License"
 _T=120
 _t=100
 _d=12
 _mode=1
 _key=t
-_verinfo="UnicodeConverter.sh"
 _h=1
 _help=\
 "Usage: $0 [OPTION]
 UnicodeConverter.sh is a script to help to input text to Minetest unicodeparser CSM.
 
 option:
- -T DELAY   set the DELAY(ms) (default is $_T) from inputting to beginning to output
- -t DELAY   (only in MODE from 1 to 2) set the DELAY(ms) (default is $_t) between keystrokes
- -d DELAY   (only in MODE 2) set the DELAY(ms) (default is $_d) between typing chars
- -m MODE    set the MODE (default is $_mode) of this script, 1 or 2 or 3 or 4:
-               1    use clipboard and ctrl+v  
-                    (There is a bug in Minetest's paste, which is why the MODE use two ctrl+v
-                    but not normally one, so this way may be not available in your environment.
-                    I tested it only in Minetest 0.4.17.1, but in my envitonment is the best MODE.
-                    If your Minetest is below version 5.0.0, please try this MODE first.
-                    If abnormal, please try MODE 1.5)
-               1.5  use clipboard and ctrl+v (use normally one ctrl+v.
-                    It seems that the bug in MODE 1 has been fixed in Minetest 5.0.0)
-               2    type chars of the transformed text one-by-one automatically and dont't use paste.
-               3    only copy the transformed text to clipboard
-               4    only print the transformed text
- -H HOW     (only in MODE from 1 to 2) tell script how you use this script.
-            HOW (default is $_h) is 1 (if you use script when in game interface, use 1) or 2 (if you
-            use script when in chat interface, use 2)
- -s TEXT    TEXT will be transformed. If use this option, the input box will not be used
- -k KEY     (only in HOW 1 and MODE from 1 to 2) set key (default is $_key) for chatting set in Minetest,
-            as the xdotool form.
- -h         display this help and exit
- -v         output version info and exit
+ -T DELAY   set the DELAY(ms) (default is $_T) from inputting to beginning to outputi.
+ -t DELAY   (only in MODE 1, 1.5 and 2) set the DELAY(ms) (default is $_t) between keystrokes.
+ -d DELAY   (only in MODE 2) set the DELAY(ms) (default is $_d) between typing chars.
+ -m MODE    set the MODE (default is $_mode) of this script, 1 or 1.5 or 2 or 3 or 4:
+               1    use clipboard and two ctrl+v.
+                    There may be a bug in paste, which is why this default MODE use two ctrl+v but not normally one.
+                    MODE 1 has been tested in Minetest 0.4.17.1, in which the mode worked well but MODE 1.5 not.
+                    Please try this MODE first and then if abnormal, try MODE 1.5
+               1.5  use clipboard and ctrl+v (use normally one ctrl+v).
+               2    type chars of the transformed text one-by-one automatically and dont't use ctrl+v.
+               3    only copy the transformed text to clipboard.
+               4    only print the transformed text.
+ -H HOW     (only in MODE 1, 1.5 and/or 2) tell script how you use this script.
+            HOW (default is $_h) is 1 (if you use script when in game interface, use 1) or 2 (if you use script when in chat interface, use 2).
+ -s TEXT    TEXT will be transformed. When this option is used, the input box will not be used.
+ -k KEY     (only in HOW 1 and at the same time MODE 1, 1.5 or 2) set key (default is $_key) for chatting set in Minetest.
+            The key code should be in the xdotool form.
+ -h         display this help and exit.
+ -v         output version info and exit.
 
 DEPENDS:
  bash
  busybox
- xclip (MODE 1 or 1.5 or 3)
- xdotool (MODE from 1 to 2)
+ xclip (depended by MODE 1, 1.5 and/or 3)
+ xdotool (MODE 1 to 2)
 
 Exit status:
  0 if OK,
@@ -51,7 +49,7 @@ _text=""
 _s=0
 
 ## Get options
-while getopts "T:t:d:m:H:s:k:h" opt;
+while getopts "T:t:d:m:H:s:k:hv" opt;
 do
 	case $opt in
 		T) _T="$OPTARG" ;;
